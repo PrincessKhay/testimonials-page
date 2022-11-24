@@ -1,0 +1,44 @@
+.form-container {
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.form-field {
+  padding: 10px;
+  font-size: 15px;
+}
+
+span {
+  font-size: 14px;
+  /* color: #21ac2f; */
+  color: #d2120f;
+  margin-bottom: 10px;
+}
+
+input {
+  background: #f2f2f2;
+}
+input:focus,
+textarea:focus {
+  outline: none;
+  /* border: 1px solid #c97b7a; */
+  /* box-shadow: 0px 0px 0px 4px #fbe7e7; */
+}
+input:hover {
+  /* border: 1px solid #da3d3a; */
+  box-shadow: 0px 0px 0px 4px #fbe7e7;
+}
+
+.error {
+  border-style: solid;
+  border: 2px solid #ffa4a4;
+}
+
+button:disabled {
+  cursor: default;
+}

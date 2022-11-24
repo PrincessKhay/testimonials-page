@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.text_div p {
+  @apply sm:text-lg leading-loose;
+}
+
+.text_div h2 {
+  @apply text-xl sm:text-2xl font-black;
+}
+
+.info__ {
+  margin-top: 1.5rem !important;
+}
+
+@media screen and (max-width: 500px) {
+  .text_div p {
+    font-size: 0.95rem;
+    line-height: 1.8;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .text_div {
+    margin-top: 1.6rem !important;
+  }
+}
+
+
