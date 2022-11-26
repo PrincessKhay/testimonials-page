@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import "./Testimonials.css";
 
 function ModalFormT({ visible, onClose }) {
@@ -18,18 +18,53 @@ function ModalFormT({ visible, onClose }) {
   };
 
   // submitted event
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (values.userName && values.message) {
-      setValid(true);
-    }
-    setSubmitted(true);
-  };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   if (values.userName && values.message) {
+  //     setValid(true);
+  //   }
+  //   setSubmitted(true);
+  // };
 
   // for modal
   const handleOnClose = (e) => {
     if (e.target.id === "main_box") onClose();
   };
+
+  // const comment = useRef(null);
+
+  const [postResult, setPostResult] = useState(null);
+
+  async function postData() {
+    const postData = {
+      review: values.message,
+    };
+
+    console.log(postData);
+
+    try {
+      const res = await fetch(`https://api.loveme.hng.tech/review/`, {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+          "x-access-token": "token-value",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify(postData),
+      });
+
+      const data = await res.json();
+      console.log(data);
+      setPostResult(data);
+    } catch (err) {
+      console.log(err);
+      // setPostResult(err);
+    }
+  }
+
+  // const clearPostOutput = () => {
+  //   setPostResult(null);
+  // };
 
   if (!visible) return null;
 
@@ -41,7 +76,7 @@ function ModalFormT({ visible, onClose }) {
     >
       <div className="form-container bg-white fixed z-1000 rounded-xl lg:w-5/12 md:w-6/12 sm:w-8/12 w-9/12 p-6 sm:p-8 md:p-12">
         <form
-          onSubmit={handleSubmit}
+          // onSubmit={postData}
           // action="#"
           method="get"
           className="register-form"
@@ -92,11 +127,13 @@ function ModalFormT({ visible, onClose }) {
           ) : null}
           <button
             className="form-field bg-[#d2120f] text-white border rounded-md cursor-pointer"
-            type="submit"
+            onClick={postData}
           >
             Post
           </button>
         </form>
+
+        <button onClick={postData}>click and try</button>
 
         <div className="hidden md:block">
           <img
